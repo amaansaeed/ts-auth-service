@@ -1,0 +1,16 @@
+FROM node:alpine
+
+LABEL service=authentication
+
+WORKDIR /src
+
+COPY ./package.json /src
+
+RUN yarn global add nodemon ts-node typescript \
+    && yarn install
+
+COPY ./ /src
+
+EXPOSE 5000
+
+ENTRYPOINT ["yarn", "dev:docker"]
